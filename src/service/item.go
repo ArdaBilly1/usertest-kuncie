@@ -39,11 +39,8 @@ func (s *itemService) CreateItem(request *request.InsertRequest) error {
 	item.ItemName = request.ItemName
 	item.ItemPrice = request.ItemPrice
 	item.SKU = request.SKU
-	if err := s.repository.Create(item); err != nil {
-		return err
-	}
 
-	return nil
+	return s.repository.Create(item)
 }
 
 func (s *itemService) GetAllItem() (items []response.ItemResponse, err error) {

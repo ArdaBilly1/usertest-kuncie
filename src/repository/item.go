@@ -10,6 +10,7 @@ import (
 type ItemRepository interface {
 	GetAll() (items []model.Item, err error)
 	GetById(id int) (item model.Item, err error)
+	GetByIds(ids []int) (item []model.Item, err error)
 	Create(item model.Item) error
 	Update(item model.Item, id int) error
 	GetSKU(sku string) (id int, err error)
@@ -35,6 +36,15 @@ func (r *itemRepository) GetAll() (items []model.Item, err error) {
 func (r *itemRepository) GetById(id int) (item model.Item, err error) {
 	err = r.db.Model(item).
 		Where("id", id).
+		Find(&item).
+		Error
+
+	return
+}
+
+func (r *itemRepository) GetByIds(ids []int) (item []model.Item, err error) {
+	err = r.db.Model(item).
+		Where("id IN (?)", ids).
 		Find(&item).
 		Error
 

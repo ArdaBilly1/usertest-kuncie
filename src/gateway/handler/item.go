@@ -14,15 +14,15 @@ type ItemHandler interface {
 	GetAllItem(c echo.Context) error
 }
 
-type handler struct {
+type itemHandler struct {
 	service service.ItemService
 }
 
 func New(srv service.ItemService) ItemHandler {
-	return &handler{service: srv}
+	return &itemHandler{service: srv}
 }
 
-func (h *handler) InsertItem(c echo.Context) error {
+func (h *itemHandler) InsertItem(c echo.Context) error {
 	req := new(request.InsertRequest)
 	resp := new(common.DefaultResponse)
 
@@ -46,7 +46,7 @@ func (h *handler) InsertItem(c echo.Context) error {
 	return c.JSON(http.StatusOK, resp)
 }
 
-func (h *handler) GetAllItem(c echo.Context) error {
+func (h *itemHandler) GetAllItem(c echo.Context) error {
 	resp := new(common.DefaultResponse)
 
 	data, err := h.service.GetAllItem()

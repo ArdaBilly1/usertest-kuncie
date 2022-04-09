@@ -13,6 +13,14 @@ func NewInventoryService(repo repository.InventoryRepository) InventoryService {
 	return &inventoryService{repository: repo}
 }
 
-func (s *inventoryService) InsertInventory() {
+func (s *inventoryService) Create() {
+
+}
+
+func (s *inventoryService) UpdateStock() {
+
+}
+
+func (s *inventoryService) GetStock(itemId int) {
 
 }

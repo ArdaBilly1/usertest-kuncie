@@ -14,7 +14,16 @@ func V1(e *echo.Echo) {
 		return c.String(http.StatusOK, "echo says : 'im fine'")
 	})
 
-	item := ItemInjector(config.MysqlDB)
-	v1.POST("/item", item.InsertItem)
-	v1.GET("/item", item.GetAllItem)
+	itemHandler := ItemInjector(config.MysqlDB)
+	item := v1.Group("/item")
+	item.POST("", itemHandler.InsertItem)
+	item.GET("", itemHandler.GetAllItem)
+
+	promoHandler := PromoInjector(config.MysqlDB)
+	promo := v1.Group("/promo")
+	promo.POST("", promoHandler.CreatePromo)
+
+	orderHandler := OrderInjectory(config.MysqlDB)
+	order := v1.Group("/order")
+	order.POST("/checkout", orderHandler.Checkout)
 }

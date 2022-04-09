@@ -12,6 +12,7 @@ type Promo struct {
 	Name        string    `json:"name"`
 	Type        int8      `json:"type"`
 	MinQty      int16     `json:"min_qty"`
+	ItemId      int       `json:"item_id"`
 	ItemBonusId int       `json:"item_bonus_id"`
 	Percentage  float32   `json:"percentage"`
 	CreatedAt   time.Time `json:"created_at"`
